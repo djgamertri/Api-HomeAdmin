@@ -3,7 +3,7 @@ import { conex } from "../../db/db.js";
 export const NewPay = async (req,res) => {
     try {
         const {User,Date,State,File} = req.body
-        const [result] = await conex.query("INSERT INTO PayAdmin (IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin) VALUES (?, ?, ?, ?),",[User,Date,State,File])
+        const [result] = await conex.query("INSERT INTO PayAdmin (IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin) VALUES (?, ?, ?, ?);",[User,Date,State,File])
         console.log(result);
         res.json({
             TaxValue,
