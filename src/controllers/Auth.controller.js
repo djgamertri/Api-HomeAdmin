@@ -36,6 +36,7 @@ export const Login = async (req, res) => {
     })
 
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: 'something goes wrong',
       error
@@ -60,6 +61,7 @@ export const NewUser = async (req, res) => {
       Email
     })
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: 'something goes wrong',
       error
