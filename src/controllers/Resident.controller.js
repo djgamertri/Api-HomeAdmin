@@ -8,7 +8,8 @@ export const GetResident = async (req,res) => {
         res.json(result);
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }
@@ -20,7 +21,8 @@ export const GetResidents = async (req,res) => {
         res.json(result);
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }
@@ -32,7 +34,8 @@ export const GetResidentsPayment = async (req,res) => {
         res.json(result);
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }
@@ -49,7 +52,8 @@ export const UpdateResident = async (req,res) => {
         res.json(rows[0]); 
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }

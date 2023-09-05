@@ -11,7 +11,8 @@ export const NewPay = async (req,res) => {
         });
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }
@@ -24,7 +25,8 @@ export const GetPay = async (req,res) => {
         res.json(result);
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }
@@ -53,7 +55,8 @@ export const UpdatePay = async (req,res) => {
         });
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }

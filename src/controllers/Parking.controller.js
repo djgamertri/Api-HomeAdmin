@@ -14,7 +14,8 @@ export const NewParking = async (req,res) => {
         res.json(req.body);
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }
@@ -26,7 +27,8 @@ export const GetResidentsWithParking = async (req,res) => {
         res.json(result);
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }
@@ -38,7 +40,8 @@ export const GetResidentsWithOutParking = async (req,res) => {
         res.json(result);
     } catch (error) {
         return res.status(500).json({
-            message: "something goes wrong"
+            message: "something goes wrong",
+            error
         })
     }
 }
