@@ -50,7 +50,7 @@ export const GetPays = async (req,res) => {
 export const UpdatePay = async (req,res) => {
     try {
         const {User,Date,State,File,Id} = req.body
-        const [result] = await conex.query("UPDATE PayAdmin SET IdUser = IFNULL(?,IdUser), RegistDate = IFNULL(?,RegistDate), StatusPayAdmin = IFNULL(?,StatusPayAdmin), FIlePayAdmin = IFNULL(?,FIlePayAdmin) WHERE IdPayAdmin = ?,",[User,Date,State,File,Id])
+        const [result] = await conex.query("UPDATE PayAdmin SET IdUser = IFNULL(?,IdUser), RegistDate = IFNULL(?,RegistDate), StatusPayAdmin = IFNULL(?,StatusPayAdmin), FIlePayAdmin = IFNULL(?,FIlePayAdmin) WHERE IdPayAdmin = ?;",[User,Date,State,File,Id])
         console.log(result);
         res.json({
             TaxValue,
