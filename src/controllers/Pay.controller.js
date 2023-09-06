@@ -35,7 +35,7 @@ export const GetPay = async (req,res) => {
 
 export const GetPays = async (req,res) => {
     try {
-        const [result] = await conex.query("SELECT * FROM PayAdmin;")
+        const [result] = await conex.query("SELECT * FROM PayAdmin inner join users on PayAdmin.IdUser = users.IdUser;")
         console.log(result);
         res.json(result);
     } catch (error) {
