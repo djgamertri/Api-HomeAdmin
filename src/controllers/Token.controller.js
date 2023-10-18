@@ -8,7 +8,7 @@ export const GenerateToken = (user) => {
 }
 
 export const ValidateToken = (req, res, next) => {
-  const token = req.headers["authorization"];
+  const token = req.headers.authorization
   if (!token) {
     return res.status(401).send('Access denied')
   }
