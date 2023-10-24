@@ -10,11 +10,13 @@ import logger from 'morgan'
 
 const app = express()
 
-app.use(cors({
+const corsOptions = {
   origin: '*',
-  credentials: true,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
-}))
+  credentials: true, // access-control-allow-credentials:true
+  optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
