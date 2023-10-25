@@ -11,7 +11,7 @@ import logger from 'morgan'
 const app = express()
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: '*',
   credentials: true, // access-control-allow-credentials:true
   optionSuccessStatus: 200
 }
