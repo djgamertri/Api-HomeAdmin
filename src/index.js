@@ -1,6 +1,8 @@
 import express from 'express'
 import AuthRoutes from './routes/Auth.routes.js'
 import PayRoutes from './routes/Pay.routes.js'
+import CommonAreaRoutes from './routes/CommonArea.routes.js'
+import SlotRoutes from './routes/Slot.routes.js'
 import ParkingRoutes from './routes/Parking.routes.js'
 import ResidentRoutes from './routes/Resident.routes.js'
 import { ValidateToken } from './controllers/Token.controller.js'
@@ -22,6 +24,8 @@ app.use(express.json())
 
 app.use('/api', AuthRoutes)
 app.use('/api', ValidateToken, PayRoutes)
+app.use('/api', ValidateToken, CommonAreaRoutes)
+app.use('/api', ValidateToken, SlotRoutes)
 app.use('/api', ValidateToken, ParkingRoutes)
 app.use('/api', ValidateToken, ResidentRoutes)
 
