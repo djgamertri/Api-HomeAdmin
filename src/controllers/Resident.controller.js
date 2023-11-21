@@ -2,7 +2,7 @@ import { conex } from '../../db/db.js'
 
 export const GetResident = async (req, res) => {
   try {
-    const Id = parseInt(req.query.id)
+    const Id = parseInt(req.params.id)
     const [result] = await conex.query('SELECT * FROM users WHERE IdUser = ? AND StatusUser = 1;', [Id])
     console.log(result)
     res.json(result)

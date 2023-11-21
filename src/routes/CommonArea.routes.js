@@ -5,7 +5,7 @@ const router = Router()
 
 router.post('/CommonArea', NewCommonArea)
 
-router.get('/CommonArea', GetCommonArea)
+router.get('/CommonArea/:id', GetCommonArea)
 
 router.get('/CommonAreas', GetCommonAreas)
 

@@ -1,22 +1,19 @@
 import { conex } from '../../db/db.js'
 
 export const NewSlot = async (req, res) => {
-    try {
-      const { TypeSpace } = req.body
-      const [result] = await conex.query('INSERT INTO Slot (TypeSlot) VALUES (?)', [TypeSpace])
-      console.log(result)
-      res.json({
-        TaxValue,
-        TaxYear
-      })
-    } catch (error) {
-      console.log(error)
-      return res.status(500).json({
-        message: 'something goes wrong',
-        error
-      })
-    }
+  try {
+    const { TypeSpace } = req.body
+    const [result] = await conex.query('INSERT INTO Slot (TypeSlot) VALUES (?)', [TypeSpace])
+    console.log(result)
+    res.json(result)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      message: 'something goes wrong',
+      error
+    })
   }
+}
 
 export const GetSlots = async (req, res) => {
   try {
@@ -34,7 +31,7 @@ export const GetSlots = async (req, res) => {
 
 export const GetSlot = async (req, res) => {
   try {
-    const Id = parseInt(req.query.id)
+    const Id = parseInt(req.params.id)
     const [result] = await conex.query('SELECT * FROM Slot WHERE IdSlot = ?;', [Id])
     console.log(result)
     res.json(result)

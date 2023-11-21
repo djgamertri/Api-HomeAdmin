@@ -3,7 +3,7 @@ import { DeleteResident, GetResident, GetResidents, GetResidentsPayment, UpdateR
 
 const router = Router()
 
-router.get('/Resident', GetResident)
+router.get('/Resident/:id', GetResident)
 
 router.get('/ResidentPayment', GetResidentsPayment)
 

@@ -1,11 +1,11 @@
 import { Router } from 'express'
-import { NewSlot, GetSlot, GetSlots, UpdateSlot, DeleteSlot } from '../controllers/Slot.js'
+import { NewSlot, GetSlot, GetSlots, UpdateSlot, DeleteSlot } from '../controllers/Slot.controller.js'
 
 const router = Router()
 
 router.post('/Slot', NewSlot)
 
-router.get('/Slot', GetSlot)
+router.get('/Slot/:id', GetSlot)
 
 router.get('/Slots', GetSlots)
 

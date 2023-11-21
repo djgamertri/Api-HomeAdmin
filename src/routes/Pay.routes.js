@@ -5,7 +5,7 @@ const router = Router()
 
 router.post('/Pay', NewPay)
 
-router.get('/Pay', GetPay)
+router.get('/Pay/:id', GetPay)
 
 router.get('/Pays', GetPays)
 
