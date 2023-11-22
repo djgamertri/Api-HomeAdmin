@@ -4,7 +4,7 @@ import { config } from 'dotenv'
 config()
 
 export const GenerateToken = (user) => {
-  return jwt.sign(user, process.env.TOKEN_KEY, { expiresIn: '60m' })
+  return jwt.sign(user, process.env.TOKEN_KEY || 'Pass', { expiresIn: '60m' })
 }
 
 export const ValidateToken = (req, res, next) => {

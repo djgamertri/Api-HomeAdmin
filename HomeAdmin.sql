@@ -3,50 +3,50 @@ use HomeAdmin;
 
 create table users(
 	IdUser int auto_increment primary key,
-    Pass varchar(80) not null,
-    TypeDoc varchar(255) not null,
-    NumDoc int unsigned unique not null,
-    NameUser varchar(255) not null,
+  Pass varchar(80) not null,
+  TypeDoc varchar(255) not null,
+  NumDoc int unsigned unique not null,
+  NameUser varchar(255) not null,
 	BirthDate date not null,
-    Phone int unsigned not null,
-    Email varchar(255) not null,
-    NumHouse tinyint unsigned not null,
+  Phone int unsigned not null,
+  Email varchar(255) not null,
+  NumHouse tinyint unsigned not null,
 	RoleUser varchar(255) not null,
 	StatusUser boolean not null,
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 create table Survey(
 	IdSurvey int auto_increment primary key,
-    ProposalSurvey varchar(255) not null,
-    DescriptionSurvey varchar(255) not null,
-    DateStartSurvey date not null,
-    DateEndSurvey date not null,
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  ProposalSurvey varchar(255) not null,
+  DescriptionSurvey varchar(255) not null,
+  DateStartSurvey date not null,
+  DateEndSurvey date not null,
+  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 create table Vote(
 	IdVote int auto_increment primary key,
 	OptionVote varchar(255),
-    DateHourVote datetime not null,
+  DateHourVote datetime not null,
 	Idvoting int not null, foreign key(Idvoting) references Survey (IdSurvey),
-    IdUser int not null, foreign key(IdUser) references users (IdUser)
+  IdUser int not null, foreign key(IdUser) references users (IdUser)
 );
 
 
 create table PayAdmin(
 	IdPayAdmin int auto_increment primary key,
-    IdUser int not null, foreign key(IdUser) references users (IdUser),
-    RegistDate date not null,
-    StatusPayAdmin boolean not null,
-    FIlePayAdmin blob not null,
+  IdUser int not null, foreign key(IdUser) references users (IdUser),
+  RegistDate date not null,
+  StatusPayAdmin boolean not null,
+  FIlePayAdmin blob not null,
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 create table CommonArea(
 	IdCommonArea int auto_increment primary key,
-    NameCommonArea varchar(255) not null,
-    status boolean not null default 1,
+  NameCommonArea varchar(255) not null,
+  status boolean not null default 1,
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -58,15 +58,15 @@ create table Rent(
 
 create table Vehicle(
 	Plate varchar(255) primary key,
-    StatusVehicle boolean not null,
-    TypeVehicle varchar(255) not null,
+  StatusVehicle boolean not null,
+  TypeVehicle varchar(255) not null,
 	IdUser int not null, foreign key(IdUser) references users (IdUser),
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 create table Slot(
 	IdSlot tinyint auto_increment primary key,
-    TypeSlot varchar(255) not null,
+  TypeSlot varchar(255) not null,
 	StatusSlot boolean not null default 1,
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -74,16 +74,16 @@ create table Slot(
 create table Parking(
 	IdSpace tinyint not null, foreign key(IdSpace) references Slot (IdSlot),
 	Plate varchar(255) not null, foreign key(Plate) references Vehicle (Plate),
-    status boolean not null default 1,
+  status boolean not null default 1,
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO users (Pass,TypeDoc, NumDoc, NameUser, BirthDate, Phone, Email, NumHouse, RoleUser, StatusUser)
 VALUES
-  ( 'iijtpbp841/*','DNI' ,12345678, 'Juan Pérez', '1990-05-15', 987654321, 'juan.perez@example.com', 25, 'Usuario Normal', true),
+  ( 'iijtpbp841/*','DNI' ,12345678, 'Juan Pérez', '1990-05-15', 987654321, 'juan.perez@example.com', 25, 'Residente', true),
   ('$irnvpe845198/','Carnet de Extranjería', 87654321, 'María Gómez', '1985-11-30', 987654321, 'maria.gomez@example.com', 10, 'Administrador', true),
-  ( 'andexfognwp54981','Pasaporte', 54321678, 'Pedro Martínez', '1988-07-20', 987654321, 'pedro.martinez@example.com', 30, 'Usuario Normal', false),
-  ( '/prtjboinmorn51965165*' ,'DNI', 98765432, 'Laura Fernández', '1995-02-10', 987654321, 'laura.fernandez@example.com', 15, 'Usuario Normal', true);
+  ( 'andexfognwp54981','Pasaporte', 54321678, 'Pedro Martínez', '1988-07-20', 987654321, 'pedro.martinez@example.com', 30, 'Residente', false),
+  ( '/prtjboinmorn51965165*' ,'DNI', 98765432, 'Laura Fernández', '1995-02-10', 987654321, 'laura.fernandez@example.com', 15, 'Residente', true);
 
 
 INSERT INTO PayAdmin (IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin)

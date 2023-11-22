@@ -11,6 +11,6 @@ router.get('/Residents', GetResidents)
 
 router.patch('/Resident', UpdateResident)
 
-router.delete('/Resident/:id', DeleteResident)
+router.patch('/Resident/:id', DeleteResident)
 
 export default router

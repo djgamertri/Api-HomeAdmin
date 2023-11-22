@@ -14,8 +14,9 @@ import logger from 'morgan'
 const app = express()
 
 const corsOptions = {
-  origin: '*', // access-control-allow-credentials:true
-  optionSuccessStatus: 200
+  origin: 'http://localhost:5173',
+  optionSuccessStatus: 200,
+  credentials: true
 }
 
 app.use(cors(corsOptions))
@@ -25,8 +26,8 @@ app.use(express.json())
 
 app.use('/api', AuthRoutes)
 app.use('/api', UploadRoutes)
-app.use('/api', ValidateToken, ResidentRoutes)
-app.use('/api', ValidateToken, PayRoutes)
+app.use('/api', ResidentRoutes)
+app.use('/api', PayRoutes)
 app.use('/api', ValidateToken, CommonAreaRoutes)
 app.use('/api', ValidateToken, SlotRoutes)
 app.use('/api', ValidateToken, ParkingRoutes)
