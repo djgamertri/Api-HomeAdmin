@@ -45,14 +45,14 @@ export const GetResidentsPayment = async (req, res) => {
 
 export const UpdateResident = async (req, res) => {
   try {
-    const { TypeDocument, Pass, NumDocument, Name, Birthday, Phone, Email, NumberHouse, Rol, State, Id } = req.body
-    const [result] = await conex.query('UPDATE users SET TypeDoc = IFNULL(?,TypeDoc), Pass = IFNULL(?,Pass), NumDoc = IFNULL(?,NumDoc), NameUser = IFNULL(?,NameUser), BirthDate = IFNULL(?,BirthDate), Phone = IFNULL(?,Phone), Email = IFNULL(?,Email), NumHouse = IFNULL(?,NumHouse), RoleUser = IFNULL(?,RoleUser), StatusUser = IFNULL(?,StatusUser) WHERE IdUser = ?;', [TypeDocument, Pass, NumDocument, Name, Birthday, Phone, Email, NumberHouse, Rol, State, Id])
+    const { TypeDoc, Pass, NumDoc, NameUser, BirthDate, Phone, Email, NumHouse, RoleUser, StatusUser, IdUser } = req.body
+    const [result] = await conex.query('UPDATE users SET TypeDoc = IFNULL(?,TypeDoc), Pass = IFNULL(?,Pass), NumDoc = IFNULL(?,NumDoc), NameUser = IFNULL(?,NameUser), BirthDate = IFNULL(?,BirthDate), Phone = IFNULL(?,Phone), Email = IFNULL(?,Email), NumHouse = IFNULL(?,NumHouse), RoleUser = IFNULL(?,RoleUser), StatusUser = IFNULL(?,StatusUser) WHERE IdUser = ?;', [TypeDoc, Pass, NumDoc, NameUser, BirthDate, Phone, Email, NumHouse, RoleUser, StatusUser, IdUser])
     if (result.affectedRows === 0) {
       return res.status(404).json({
         message: 'User not found to update'
       })
     }
-    const [rows] = await conex.query('Select * from users where IdUser = ?', [Id])
+    const [rows] = await conex.query('Select * from users where IdUser = ?', [IdUser])
     console.log(result)
     res.json(rows[0])
   } catch (error) {
