@@ -56,7 +56,7 @@ export const UpdateCommonArea = async (req, res) => {
         message: 'Common Area not found to update'
       })
     }
-    const [rows] = await conex.query('SELECT * FROMO CommonArea where IdCommonArea = ?', [Id])
+    const [rows] = await conex.query('SELECT * FROM CommonArea where IdCommonArea = ?', [Id])
     console.log(result)
     res.json(rows[0])
   } catch (error) {

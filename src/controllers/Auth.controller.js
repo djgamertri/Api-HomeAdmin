@@ -1,13 +1,11 @@
 import { conex } from '../../db/db.js'
 import { GenerateToken } from './Token.controller.js'
-import { TOKEN_KEY } from '../../db/config.js'
 
 export const Login = async (req, res) => {
   try {
     const { Email, Pass } = req.body
     const [[result]] = await conex.query('SELECT * FROM users WHERE Email=? AND Pass=? AND StatusUser = 1', [Email, Pass])
     console.log(result)
-    console.log(TOKEN_KEY)
 
     if (!result) {
       return res.status(404).json({
