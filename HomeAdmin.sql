@@ -1,5 +1,5 @@
-create database HomeAdmin;
-use HomeAdmin;
+create database home;
+use home;
 
 create table users(
 	IdUser int auto_increment primary key,
@@ -80,10 +80,10 @@ create table Parking(
 
 INSERT INTO users (Pass,TypeDoc, NumDoc, NameUser, BirthDate, Phone, Email, NumHouse, RoleUser, StatusUser)
 VALUES
-  ( 'iijtpbp841/*','DNI' ,12345678, 'Juan Pérez', '1990-05-15', 987654321, 'juan.perez@example.com', 25, 'Usuario Normal', true),
-  ('$irnvpe845198/','Carnet de Extranjería', 87654321, 'María Gómez', '1985-11-30', 987654321, 'maria.gomez@example.com', 10, 'Administrador', true),
-  ( 'andexfognwp54981','Pasaporte', 54321678, 'Pedro Martínez', '1988-07-20', 987654321, 'pedro.martinez@example.com', 30, 'Usuario Normal', false),
-  ( '/prtjboinmorn51965165*' ,'DNI', 98765432, 'Laura Fernández', '1995-02-10', 987654321, 'laura.fernandez@example.com', 15, 'Usuario Normal', true);
+  ( 'iijtpbp841/*','Tarjeta de identidad' ,12345678, 'Juan Pérez', '1990-05-15', 987654321, 'juan.perez@example.com', 25, 'Residente', true),
+  ('$irnvpe845198/','Cedula extranjeria', 87654321, 'María Gómez', '1985-11-30', 987654321, 'maria.gomez@example.com', 10, 'Administrador', true),
+  ( 'andexfognwp54981','Cedula ciudadania', 54321678, 'Pedro Martínez', '1988-07-20', 987654321, 'pedro.martinez@example.com', 30, 'Residente', false),
+  ( '/prtjboinmorn51965165*' ,'Cedula ciudadania', 98765432, 'Laura Fernández', '1995-02-10', 987654321, 'laura.fernandez@example.com', 15, 'Residente', true);
 
 
 INSERT INTO PayAdmin (IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin)

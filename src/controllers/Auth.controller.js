@@ -44,7 +44,7 @@ export const Login = async (req, res) => {
 
 export const NewUser = async (req, res) => {
   try {
-    const { TypeDocument, Pass, NumDocument, Name, Birthday, Phone, Email, NumberHouse, Rol, State } = req.body
+    const { TypeDoc, Pass, NumDoc, NameUser, BirthDate, Phone, Email, NumHouse, RoleUser, StatusUser } = req.body
     const [result] = await conex.query('SELECT*FROM users WHERE Email = ?', [Email])
     console.log(result)
     if (result.length > 0) {
@@ -52,10 +52,10 @@ export const NewUser = async (req, res) => {
         message: 'the user already exists'
       })
     }
-    const [rows] = await conex.query('INSERT INTO users (TypeDoc, Pass, NumDoc, NameUser, BirthDate, Phone, Email, NumHouse, RoleUser, StatusUser) VALUES (?,?,?,?,?,?,?,?,?,?);', [TypeDocument, Pass, NumDocument, Name, Birthday, Phone, Email, NumberHouse, Rol, State])
+    const [rows] = await conex.query('INSERT INTO users (TypeDoc, Pass, NumDoc, NameUser, BirthDate, Phone, Email, NumHouse, RoleUser, StatusUser) VALUES (?,?,?,?,?,?,?,?,?,?);', [TypeDoc, Pass, NumDoc, NameUser, BirthDate, Phone, Email, NumHouse, RoleUser, StatusUser])
     res.json({
       id: rows.id,
-      Name,
+      NameUser,
       Email
     })
   } catch (error) {
