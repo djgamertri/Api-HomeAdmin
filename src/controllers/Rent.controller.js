@@ -2,7 +2,7 @@ import { conex } from '../../db/db.js'
 
 export const GetRentPending = async (req, res) => {
   try {
-    const [result] = await conex.query('select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1 AND r.status = 0;')
+    const [result] = await conex.query('select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1 AND r.status = 0 AND active = 1;')
     console.log(result)
     res.json(result)
   } catch (error) {
@@ -16,7 +16,7 @@ export const GetRentPending = async (req, res) => {
 
 export const GetRentAccepted = async (req, res) => {
   try {
-    const [result] = await conex.query('select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1 AND r.status = 1;')
+    const [result] = await conex.query('select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1 AND r.status = 1 AND active = 1;')
     console.log(result)
     res.json(result)
   } catch (error) {
@@ -31,7 +31,7 @@ export const GetRentAccepted = async (req, res) => {
 export const getRent = async (req, res) => {
   try {
     const Id = parseInt(req.params.id)
-    const [result] = await conex.query('SELECT * FROM rent WHERE Idrent = ?', [Id])
+    const [result] = await conex.query('select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1  AND r.Idrent = ?', [Id])
     console.log(result)
     res.json(result)
   } catch (error) {
