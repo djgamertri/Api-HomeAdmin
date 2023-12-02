@@ -27,3 +27,19 @@ export const GetRentAccepted = async (req, res) => {
     })
   }
 }
+
+export const NewRent = async (req, res) => {
+  try {
+    const { IdUser, IdCommonArea, RentDate } = req.body
+    const [result] = await conex.query('INSERT INTO rent (IdUser, IdCommonArea, RentDate) VALUES (?,?,?)', [IdUser, IdCommonArea, RentDate])
+    console.log(result)
+    res.json({
+      result
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'something goes wrong',
+      error
+    })
+  }
+}
