@@ -28,6 +28,21 @@ export const GetRentAccepted = async (req, res) => {
   }
 }
 
+export const getRent = async (req, res) => {
+  try {
+    const Id = parseInt(req.params.id)
+    const [result] = await conex.query('SELECT * FROM rent WHERE Idrent = ?', [Id])
+    console.log(result)
+    res.json(result)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      message: 'something goes wrong',
+      error
+    })
+  }
+}
+
 export const NewRent = async (req, res) => {
   try {
     const { IdUser, IdCommonArea, RentDate } = req.body
