@@ -43,3 +43,45 @@ export const NewRent = async (req, res) => {
     })
   }
 }
+
+export const UpdateRent = async (req, res) => {
+  try {
+    const { IdUser, IdCommonArea, RentDate, status, active, IdRent } = req.body
+    const [result] = await conex.query('UPDATE rent SET IdUser = IFNULL (?,IdUser), IdCommonArea = IFNULL (?,IdCommonArea), RentDate = IFNULL(?, RentDate), status = IFNULL(?, status), active = IFNULL (?, active) WHERE IdRent = ?', [IdUser, IdCommonArea, RentDate, status, active, IdRent])
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        message: 'User not found to update'
+      })
+    }
+    const [rows] = await conex.query('SELECT * from rent WHERE IdRent = ?', [IdRent])
+    console.log(result)
+    res.json(rows[0])
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      message: 'something goes wrong',
+      error
+    })
+  }
+}
+
+export const DeleteRent = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id)
+    const [result] = await conex.query('UPDATE rent SET active = 0 WHERE IdRent = ?', [id])
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        message: 'Rent not found to update'
+      })
+    }
+    const [rows] = await conex.query('SELECT * FROM rent WHERE IdRent = ?', [id])
+    console.log(result)
+    res.json(rows[0])
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      message: 'something goes wrong',
+      error
+    })
+  }
+}
