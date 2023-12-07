@@ -5,7 +5,7 @@ export const NewParking = async (req, res) => {
     const data = req.body
     let Result = []
     data.forEach(async item => {
-      const [result] = await conex.query("INSERT INTO Parking (IdSpace, Plate) VALUES (?, ?)", [item.parqueadero, item.placa])
+      const [result] = await conex.query('INSERT INTO Parking (IdSpace, Plate) VALUES (?, ?)', [item.parqueadero, item.placa])
       if (result.affectedRows === 0) {
         Result += `${item.usuario} Cant user register`
       }

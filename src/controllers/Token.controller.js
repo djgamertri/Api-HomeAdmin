@@ -1,8 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { config } from 'dotenv'
 import { TOKEN_KEY } from '../../db/config.js'
-
-config()
 
 export const GenerateToken = (user) => {
   return jwt.sign(user, TOKEN_KEY, { expiresIn: '60m' })

@@ -7,6 +7,8 @@ import CommonAreaRoutes from './routes/CommonArea.routes.js'
 import SlotRoutes from './routes/Slot.routes.js'
 import ParkingRoutes from './routes/Parking.routes.js'
 import ResidentRoutes from './routes/Resident.routes.js'
+import VehicleRoutes from './routes/Vehicle.routes.js'
+
 import { ValidateToken } from './controllers/Token.controller.js'
 import { PORT } from '../db/config.js'
 import cors from 'cors'
@@ -26,6 +28,7 @@ app.use(express.json())
 
 app.use('/api', AuthRoutes)
 app.use('/api', UploadRoutes)
+app.use('/api', ValidateToken, VehicleRoutes)
 app.use('/api', ValidateToken, ResidentRoutes)
 app.use('/api', ValidateToken, PayRoutes)
 app.use('/api', ValidateToken, RentRoutes)
