@@ -67,9 +67,3 @@ export const NewUser = async (req, res) => {
   }
 }
 
-export const LogOut = async (req, res) => {
-  res.clearCookie('token', '', {
-    expires: new Date(0)
-  })
-  return res.sendStatus(200)
-}
