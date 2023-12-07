@@ -7,6 +7,4 @@ router.post('/Register', NewUser)
 
 router.post('/Login', Login)
 
-router.post('/LogOut', LogOut)
-
 export default router
