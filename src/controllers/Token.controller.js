@@ -1,10 +1,8 @@
 import jwt from 'jsonwebtoken'
-import { config } from 'dotenv'
-
-config()
+import { TOKEN_KEY } from '../../db/config.js'
 
 export const GenerateToken = (user) => {
-  return jwt.sign(user, process.env.TOKEN_KEY, { expiresIn: '60m' })
+  return jwt.sign(user, TOKEN_KEY, { expiresIn: '60m' })
 }
 
 export const ValidateToken = (req, res, next) => {
@@ -12,7 +10,7 @@ export const ValidateToken = (req, res, next) => {
   if (!token) {
     return res.status(401).send('Access denied')
   }
-  jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
+  jwt.verify(token, TOKEN_KEY, (err, user) => {
     if (err) {
       return res.status(401).send('Access denied, token expired or invalid')
     }
