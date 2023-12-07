@@ -66,4 +66,3 @@ export const NewUser = async (req, res) => {
     })
   }
 }
-
