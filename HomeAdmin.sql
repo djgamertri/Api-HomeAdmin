@@ -39,7 +39,7 @@ create table PayAdmin(
     IdUser int not null, foreign key(IdUser) references users (IdUser),
     RegistDate date not null,
     StatusPayAdmin boolean not null,
-    FIlePayAdmin blob not null,
+    FIlePayAdmin varchar(255) not null,
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -52,15 +52,17 @@ create table CommonArea(
 
 create table Rent(
 	IdUser int not null, foreign key(IdUser) references users (IdUser),
-	IdCommonArea int not null, foreign key(IdCommonArea) references CommonArea (IdCommonArea),
+	IdCommonArea int not null, 
+    foreign key(IdCommonArea) references CommonArea (IdCommonArea),
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 create table Vehicle(
 	Plate varchar(255) primary key,
-    StatusVehicle boolean not null,
+    StatusVehicle boolean not null default 1,
     TypeVehicle varchar(255) not null,
-	IdUser int not null, foreign key(IdUser) references users (IdUser),
+	IdUser int not null, 
+    foreign key(IdUser) references users (IdUser),
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -88,10 +90,10 @@ VALUES
 
 INSERT INTO PayAdmin (IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin)
 VALUES
-  (1, '2023-05-10', true, 'datos_binarios_del_archivo1'),
-  (2, '2023-05-09', true, 'datos_binarios_del_archivo2'),
-  (3, '2023-05-11', false, 'datos_binarios_del_archivo3'),
-  (4, '2023-05-08', true, 'datos_binarios_del_archivo4');
+  (1, '2023-05-10', true, 'Pago Realizado'),
+  (2, '2023-05-09', true, 'Pago Realizado'),
+  (3, '2023-05-11', false, 'Pago No Realizado'),
+  (4, '2023-05-08', true, 'Pago Realizado');
   
 INSERT INTO CommonArea (NameCommonArea)
 VALUES
@@ -107,15 +109,16 @@ VALUES
 	(3, 4),
 	(4, 1);
 
-INSERT INTO Vehicle(Plate, StatusVehicle, TypeVehicle, IdUser)
+INSERT INTO Vehicle(Plate, TypeVehicle, IdUser)
 VALUES
-  (12345, true, 'Automóvil', 1),
-  (67890, true, 'Motocicleta', 2),
-  (24680, false, 'Automóvil', 3),
-  (13579, true, 'Bicicleta', 4);
+  (12345, 'Automóvil', 1),
+  (67890, 'Motocicleta', 2),
+  (24680, 'Automóvil', 3),
+  (13579, 'Bicicleta', 4);
 
 INSERT INTO Slot (TypeSlot)
 VALUES
+  ('Parqueadero'),
   ('Parqueadero'),
   ('Parqueadero'),
   ('Parqueadero');
@@ -151,6 +154,10 @@ select * from vehicle;
 
 select * from Survey;
 select * from vote;
+
+-- Consulta Vehiculos
+
+SELECT users.IdUser, users.NameUser, users.Email, Vehicle.Plate, Vehicle.TypeVehicle FROM users JOIN Vehicle ON users.IdUser = Vehicle.IdUser WHERE Vehicle.StatusVehicle = 1;
 
 -- Usuarios con parqueadero
 SELECT park.IdSpace, vehi.Plate, user.NameUser, user.NumHouse FROM users user INNER JOIN Vehicle vehi ON vehi.IdUser = user.IdUser INNER JOIN Parking park on vehi.Plate = park.Plate;
