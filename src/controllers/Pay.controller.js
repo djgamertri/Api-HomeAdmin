@@ -2,15 +2,15 @@ import { conex } from '../../db/db.js'
 
 export const NewPay = async (req, res) => {
   try {
-    const { User, Date, State, File } = req.body
-    const [result] = await conex.query('INSERT INTO PayAdmin (IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin) VALUES (?, ?, ?, ?);', [User, Date, State, File])
+    const { IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin } = req.body
+    const [result] = await conex.query('INSERT INTO PayAdmin (IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin) VALUES (?, ?, ?, ?);', [IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin])
     console.log(result)
     res.json({
       id: result.id,
-      User,
-      Date,
-      State,
-      File
+      IdUser,
+      RegistDate,
+      StatusPayAdmin,
+      FIlePayAdmin
     })
   } catch (error) {
     console.log(error)
@@ -52,10 +52,10 @@ export const GetPays = async (req, res) => {
 
 export const UpdatePay = async (req, res) => {
   try {
-    const { User, Date, State, File, Id } = req.body
-    const [result] = await conex.query('UPDATE PayAdmin SET IdUser = IFNULL(?,IdUser), RegistDate = IFNULL(?,RegistDate), StatusPayAdmin = IFNULL(?,StatusPayAdmin), FIlePayAdmin = IFNULL(?,FIlePayAdmin) WHERE IdPayAdmin = ?;', [User, Date, State, File, Id])
+    const { IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin, IdPayAdmin } = req.body
+    const [result] = await conex.query('UPDATE PayAdmin SET IdUser = IFNULL(?,IdUser), RegistDate = IFNULL(?,RegistDate), StatusPayAdmin = IFNULL(?,StatusPayAdmin), FIlePayAdmin = IFNULL(?,FIlePayAdmin) WHERE IdPayAdmin = ?;', [IdUser, RegistDate, StatusPayAdmin, FIlePayAdmin, IdPayAdmin])
     console.log(result)
-    const [rows] = await conex.query('SELECT * FROM PayAdmin where IdPayAdmin = ?', [Id])
+    const [rows] = await conex.query('SELECT * FROM PayAdmin where IdPayAdmin = ?', [IdPayAdmin])
     console.log(result)
     res.json(rows[0])
   } catch (error) {

@@ -17,7 +17,7 @@ export const NewVehicle = async (req, res) => {
 
 export const GetVehicles = async (req, res) => {
   try {
-    const [result] = await conex.query('SELECT * FROM Vehicle WHERE StatusVehicle = 1;')
+    const [result] = await conex.query('SELECT users.IdUser, users.NameUser, users.Email, Vehicle.Plate, Vehicle.TypeVehicle, Vehicle.StatusVehicle FROM users JOIN Vehicle ON users.IdUser = Vehicle.IdUser WHERE Vehicle.StatusVehicle = 1;')
     console.log(result)
     res.json(result)
   } catch (error) {
@@ -32,7 +32,7 @@ export const GetVehicles = async (req, res) => {
 export const GetVehicle = async (req, res) => {
   try {
     const Id = parseInt(req.params.id)
-    const [result] = await conex.query('SELECT * FROM Vehicle WHERE Plate = ?;', [Id])
+    const [result] = await conex.query('SELECT users.IdUser, users.NameUser, users.Email, Vehicle.Plate, Vehicle.TypeVehicle, Vehicle.StatusVehicle FROM users JOIN Vehicle ON users.IdUser = Vehicle.IdUser WHERE Vehicle.Plate = ?;', [Id])
     console.log(result)
     res.json(result)
   } catch (error) {
@@ -50,10 +50,10 @@ export const UpdateVehicle = async (req, res) => {
     const [result] = await conex.query('UPDATE Vehicle SET Plate = IFNULL(?,Plate),  StatusVehicle = IFNULL(?,StatusVehicle), TypeVehicle = IFNULL(?,TypeVehicle) WHERE IdUser = ?;', [Plate, StatusVehicle, TypeVehicle, IdUser])
     if (result.affectedRows === 0) {
       return res.status(404).json({
-        message: 'Common Area not found to update'
+        message: 'Vehicle not found'
       })
     }
-    const [rows] = await conex.query('SELECT * FROM Vehicle where Plate = ?', [Plate])
+    const [rows] = await conex.query('SELECT users.IdUser, users.NameUser, users.Email, Vehicle.Plate, Vehicle.TypeVehicle FROM users JOIN Vehicle ON users.IdUser = Vehicle.IdUser WHERE Plate = ?', [Plate])
     console.log(result)
     res.json(rows[0])
   } catch (error) {
@@ -74,7 +74,7 @@ export const DeleteVehicle = async (req, res) => {
         message: 'User not found to update'
       })
     }
-    const [rows] = await conex.query('SELECT * FROM Vehicle where Plate = ?', [Plate])
+    const [rows] = await conex.query('SELECT users.IdUser, users.NameUser, users.Email, Vehicle.Plate, Vehicle.TypeVehicle FROM users JOIN Vehicle ON users.IdUser = Vehicle.IdUser WHERE Plate = ?', [Plate])
     console.log(result)
     res.json(rows[0])
   } catch (error) {
