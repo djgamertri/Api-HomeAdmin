@@ -31,7 +31,7 @@ export const GetRentAccepted = async (req, res) => {
 export const getRent = async (req, res) => {
   try {
     const Id = parseInt(req.params.id)
-    const [result] = await conex.query('select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1  AND r.Idrent = ?', [Id])
+    const [result] = await conex.query('select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.status, r.active from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1  AND r.Idrent = ?', [Id])
     console.log(result)
     res.json(result)
   } catch (error) {
