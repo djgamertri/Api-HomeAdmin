@@ -51,8 +51,12 @@ create table CommonArea(
 );
 
 create table Rent(
+	IdRent int auto_increment primary key,
 	IdUser int not null, foreign key(IdUser) references users (IdUser),
 	IdCommonArea int not null, foreign key(IdCommonArea) references CommonArea (IdCommonArea),
+	RentDate date not null,
+  status boolean not null default 0,
+  active boolean not null default 1,
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -100,12 +104,18 @@ VALUES
   ('Gimnasio'),
   ('Área de BBQ');
   
-INSERT INTO Rent (IdUser, IdCommonArea)
+INSERT INTO Rent (IdUser, IdCommonArea, RentDate)
 VALUES
-	(1, 2),
-	(2, 3),
-	(3, 4),
-	(4, 1);
+	(1, 2, '2024-01-07'),
+	(2, 3, '2023-12-24'),
+	(3, 4, '2023-12-31'),
+	(4, 1, '2023-12-07');
+    
+    
+INSERT INTO Rent (IdUser, IdCommonArea, RentDate, status)
+VALUES
+	(2, 1, '2023-02-14', 1);
+
 
 INSERT INTO Vehicle(Plate, StatusVehicle, TypeVehicle, IdUser)
 VALUES
@@ -157,6 +167,15 @@ SELECT park.IdSpace, vehi.Plate, user.NameUser, user.NumHouse FROM users user IN
 
 -- Usuarios sin parqueadero
 SELECT u.NameUser, u.NumHouse, v.Plate FROM users u JOIN PayAdmin pa ON u.IdUser = pa.IdUser LEFT JOIN Vehicle v ON u.IdUser = v.IdUser LEFT JOIN Parking sp ON v.Plate = sp.Plate WHERE pa.StatusPayAdmin = 1 AND (v.Plate IS NULL OR sp.IdSpace IS NULL);
+
+-- consulta admin solicitud pendiente
+select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active, r.status from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1 AND r.status = 0 AND active = 1;
+
+-- consulta admin solicitud Aprovada
+select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active, r.status from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1 AND r.status = 1 AND active = 1;
+
+
+select r.IdRent, u.NameUser, c.NameCommonArea, r.RentDate, r.active from users as u JOIN rent as r on u.IdUser = r.IdUser JOIN commonarea as c on c.IdCommonArea = r.IdCommonArea JOIN PayAdmin pa ON u.IdUser = pa.IdUser WHERE pa.StatusPayAdmin = 1  AND r.Idrent = 2;
 
 -- UPDATE CommonArea SET NameCommonArea = IFNULL(?,NameCommonArea), status = IFNULL(?,status) WHERE IdCommonArea = 1;
 -- UPDATE Slot SET TypeSlot = IFNULL(?,TypeSlot),  StatusSlot = IFNULL(?,StatusSlot) WHERE IdSlot = 1;
